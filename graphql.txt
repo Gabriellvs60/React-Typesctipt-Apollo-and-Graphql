@@ -1,0 +1,9 @@
+apollo-boost
+graphql
+react apollo
+>>>npm i apollo-boost graphql react-apollo -S
+
+apollo-client
+graphql
+graphql-codegen
+styled-componentes

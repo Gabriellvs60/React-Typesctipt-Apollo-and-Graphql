@@ -1,0 +1,13 @@
+overwrite: true
+schema: "https://api.graph.cool/simple/v1/ck445xzf722z40105uvej4j0w"
+documents: "**/*.graphql"
+generates:
+  src/common/graphql/api.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      withHooks: true
+      withHOC: false
+      withComponent: false
