@@ -16,14 +16,6 @@ const column = [
     dataIndex: 'age',
   },
   {
-    title: "Telefone",
-    dataIndex: 'telephone',
-  },
-  {
-    title: "Endereço",
-    dataIndex: 'address',
-  },
-  {
     title: "Tipo",
     dataIndex: 'type',
   }
