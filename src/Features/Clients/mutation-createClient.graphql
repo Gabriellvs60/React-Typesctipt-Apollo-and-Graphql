@@ -1,0 +1,13 @@
+mutation createClient($name: String!, $age: String!,$telephone: String!,$address: String! $type: String!) {
+   createClient(
+      name: $name
+      age: $age
+      telephone: $telephone
+      address: $address
+      type: $type
+    ) {
+    id
+    name
+    age
+  }
+}

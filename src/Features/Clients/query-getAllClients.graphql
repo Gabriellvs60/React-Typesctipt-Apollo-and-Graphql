@@ -1,0 +1,10 @@
+  query getAllClients {
+  allClients {
+    id
+    name
+    age
+    telephone
+    address
+    type
+  }
+}
