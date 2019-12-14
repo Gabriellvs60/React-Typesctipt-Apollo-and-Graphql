@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import merge from "lodash/merge";
-// import { DeleteButton } from "../../Icons";
 
 interface Props {
   data: any[];
@@ -25,14 +24,12 @@ export function useGenericTable({ columns, data }: Props) {
     mappedColumns.push({
       title: "",
       dataIndex: "",
-      align: "right",
-    //   render: (item: any) => <DeleteButton onClick={ (e) => {e.stopPropagation(); onDeletePress(item.id)} } />
+      align: "center",
+      render: ((item: any) => <img src="./icons/delete.svg" onClick={(e) => { e.stopPropagation(); }} style={{ width: "20px" }} />)
     });
 
     setCurrentColumns(mappedColumns);
   }, [columns]);
 
-
-
-  return { currentColumns, currentData};
+  return { currentColumns, currentData };
 }

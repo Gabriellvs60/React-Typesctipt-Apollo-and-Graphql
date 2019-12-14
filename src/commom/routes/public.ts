@@ -1,6 +1,6 @@
 import { RouteProps } from "react-router-dom";
 // import Login from "../../features/Login";
-import Clients from "../../features/Clients";
+import Clients from "../../Features/Clients";
 interface RouteWithRoles extends RouteProps {
   roles: string[];
 }

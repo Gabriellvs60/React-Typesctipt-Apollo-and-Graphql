@@ -10,15 +10,20 @@ interface Props{
     onClickRow?: Function
 }
 
-const GenericTable = ({data, columns}:Props) => {
+const GenericTable = ({data, columns, onClickRow}:Props) => {
     const { currentColumns, currentData } = useGenericTable({
         data,
         columns
     })
     return(
         <Table
-        columns={columns}
+        columns={currentColumns}
         dataSource={data}
+        onRow={(record) => {
+            return {
+              onClick: event => { onClickRow && onClickRow(record) }, // click row
+            };
+          }}
         />
     )
 }
