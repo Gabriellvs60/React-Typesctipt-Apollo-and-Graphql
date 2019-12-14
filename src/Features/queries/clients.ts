@@ -25,7 +25,7 @@ export const GET_CLIENT = gql`
   }
 `;
 
-export const ADD_RECIPE = gql`
+export const CREATE_CLIENT = gql`
   mutation(
     $name: String!
     $age: String!

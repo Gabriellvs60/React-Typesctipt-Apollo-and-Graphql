@@ -1,14 +1,22 @@
-import React from 'react';
-import { Input, Select } from 'antd';
+import React, {useEffect} from 'react';
+import { FormikProps } from "formik";
+import { Input, Select, Button } from 'antd';
 const { Option } = Select;
 
-interface Props {
 
+interface Props {
+    formikProps: FormikProps<any>
+    editData: any
 }
 
-const Form = ({ }: Props) => {
+const Form = ({formikProps, editData }: Props) => {
+
+    useEffect(() => {
+        editData ? formikProps.setValues(editData) : formikProps.setValues({ id: undefined, name: "", age: "", address: "", telephone: "" })
+    }, [editData])
+
     return (
-        <form>
+        <form onSubmit={formikProps.handleSubmit}>
             <p>Nome</p>
             <Input name="name" placeholder="Nome" type="text" />
             <p>Idade</p>
@@ -24,6 +32,7 @@ const Form = ({ }: Props) => {
                 <Option value="trial">Trial</Option>
             </Select>
         </form>
+        
     )
 }
 

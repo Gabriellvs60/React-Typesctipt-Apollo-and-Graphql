@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import GenericTable from '../../commom/components/Table'
-import { GET_ALL_CLIENTS } from '../../queries/clients';
+import { GET_ALL_CLIENTS } from '../queries/clients';
 import GenericDrawer from '../../commom/components/Drawer'
-import Form from './components/form';
+
 import { Button } from 'antd';
 
 interface Props { }
@@ -19,6 +19,10 @@ const column = [
     dataIndex: 'age',
   },
   {
+    title: "Endereço",
+    dataIndex: 'address',
+  },
+  {
     title: "Tipo",
     dataIndex: 'type',
   }
@@ -27,18 +31,23 @@ const column = [
 export default function Clients(props: Props) {
   const { loading, error, data } = useQuery(GET_ALL_CLIENTS);
   const [showDrawer, setShowDrawer] = useState(false)
-  const [editData, setEditData] = useState(null)
   const [title, setTitle] = useState("")
-
+  const [editData, setEditData] = useState(null)
+  
   function newClient() {
-    setEditData(null)
-    setShowDrawer(true)
-    setTitle("Novo Cliente")
-  }
+    console.log(editData)
+     setEditData(null)
+     setShowDrawer(true)
+     console.log(editData)
+     setTitle("Novo Cliente")
+   }
 
   function editItem(item: any) {
     setEditData(item)
     setShowDrawer(true)
+    alert(item)
+    console.log(editData)
+    
     setTitle("Edição de Cliente")
   }
 
@@ -48,20 +57,23 @@ export default function Clients(props: Props) {
   return (
     <div>
       <h1>Lista de Clientes - Herbie</h1>
-
+      
       <Button type="primary" onClick={() => { newClient() }}>
         Adicionar Novo
       </Button>
 
       <GenericDrawer
-        visible={showDrawer} setVisible={setShowDrawer} editData={editData} setEditData={setEditData}
+        visible={showDrawer} 
+        setVisible={setShowDrawer} 
+        editData={editData} 
+        setEditData={setEditData}
         title={title}
-        formChildren={<Form />}
       />
       <GenericTable
         columns={column}
-        data={data.allClients}
-        onClickRow={editItem} />
+        data={data.allClients || []}
+        onClickRow={editItem}
+        />
     </div>
   );
 }

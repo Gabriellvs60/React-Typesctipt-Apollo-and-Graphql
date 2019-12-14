@@ -21,7 +21,9 @@ const GenericTable = ({data, columns, onClickRow}:Props) => {
         dataSource={data}
         onRow={(record) => {
             return {
-              onClick: event => { onClickRow && onClickRow(record) }, // click row
+              onClick: event => { 
+                  onClickRow && onClickRow(record) 
+            }, // click row
             };
           }}
         />
