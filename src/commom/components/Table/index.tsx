@@ -20,7 +20,7 @@ const GenericTable = ({data, columns, onClickRow,onDeletePress}:Props) => {
     return(
         <Table
         columns={currentColumns}
-        dataSource={data}
+        dataSource={currentData}
         onRow={(record) => {
             return {
               onClick: event => { 

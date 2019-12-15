@@ -1,5 +1,5 @@
 import React, { useState, Component } from 'react'
-import { Formik, FormikProps, FormikHelpers, yupToFormErrors } from "formik";
+import { Formik, FormikProps, FormikHelpers } from "formik";
 import useMutationCreateClient from "../../../Features/Clients/hooks/useMutationCreateClient"
 import useMutationUpdateClient from "../../../Features/Clients/hooks/useMutationUpdateClient"
 import { Drawer, Button } from 'antd';
@@ -27,7 +27,16 @@ const GenericDrawer = ({ title, visible, setVisible, editData, setEditData }: Pr
     const { updateClient } = useMutationUpdateClient()
 
     function submit(values: Form, helper: FormikHelpers<Form>) {
-        editData ? updateClient(values) : createClient(values)
+        console.log("submit", values)
+
+        if (editData) {
+            updateClient(values)
+            console.log("update")
+        } else {
+            createClient(values)
+            console.log("create")
+        }
+    
         setVisible(false)
         setEditData(null)
         helper.resetForm()
@@ -52,7 +61,8 @@ const GenericDrawer = ({ title, visible, setVisible, editData, setEditData }: Pr
                     validationSchema={schema}
                     onSubmit={(values, helper) =>  submit(values, helper) }
                     onReset={(values, helper) => { cancel(helper) }}>
-                     { (props: FormikProps<Form>) => <FormClients formikProps={props} editData={editData} /> }
+                     { (props: FormikProps<Form>) =>  <FormClients formikProps={props} editData={editData} />}
+                     
                 </Formik>
             </Drawer>
         </>
@@ -64,12 +74,5 @@ export default GenericDrawer
 const schema = Yup.object({
     name: Yup.string()
         .required(),
-    age: Yup.string()
-        .required(),
-    address: Yup.string()
-        .required(),
-    telephone: Yup.string()
-        .required(),
-        type: Yup.string()
-        .required(),
+   
 });

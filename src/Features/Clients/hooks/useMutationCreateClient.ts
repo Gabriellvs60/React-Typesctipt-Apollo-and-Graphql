@@ -19,6 +19,7 @@ export default function useCreateClient() {
         //   icon: "success"
         // });
       } catch (error) {
+        console.log(error)
         ErrorHandler.handle(error, "Erro ao adicionar cliente.");
       }
   }

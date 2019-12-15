@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { FormikProps } from "formik";
-import { Input, Select, Button } from 'antd';
+import { Input, Select } from 'antd';
 const { Option } = Select;
-
 
 interface Props {
     formikProps: FormikProps<any>
@@ -12,7 +11,21 @@ interface Props {
 const Form = ({ formikProps, editData }: Props) => {
 
     useEffect(() => {
-        editData ? formikProps.setValues(editData) : formikProps.setValues({ id: undefined, name: "", age: "", address: "", telephone: "", type:"comum" })
+        editData ? formikProps.setValues({
+            id: editData.id,
+            name: editData.name,
+            age: editData.age,
+            telephone: editData.telephone,
+            address: editData.address,
+            type: editData.type,
+        }) : formikProps.setValues({
+            id: "",
+            name: "",
+            age: "",
+            telephone: "",
+            address: "",
+            type: "Premium"
+        })
     }, [editData])
 
     return (
@@ -31,14 +44,18 @@ const Form = ({ formikProps, editData }: Props) => {
                 <Option value="premium">Premium</Option>
                 <Option value="trial">Trial</Option>
             </Select>
-            <Button>
-                        Salvar
-                    </Button>
-                    <Button>
-                        Cancelar
-                    </Button>
+            <button
+                    type={'submit'}
+                    >
+                    Salvar
+                  </button>
+                <button
+                    type={'reset'}
+                   
+                    >
+                    Cancelar
+                </button>
         </form>
-
     )
 }
 

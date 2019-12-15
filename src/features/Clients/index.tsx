@@ -41,19 +41,14 @@ export default function Clients(props: Props) {
   const { deleteClient } = useMutationDeleteClient({ refetch })
   
   function newClient() {
-    console.log(editData)
      setEditData(null)
      setShowDrawer(true)
-     console.log(editData)
      setTitle("Novo Cliente")
    }
 
   function editItem(item: any) {
     setEditData(item)
     setShowDrawer(true)
-    alert(item)
-    console.log(editData)
-    
     setTitle("Edição de Cliente")
   }
 
