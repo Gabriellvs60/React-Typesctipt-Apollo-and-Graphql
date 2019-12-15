@@ -1,5 +1,7 @@
 import React, { useState, Component } from 'react'
 import { Formik, FormikProps, FormikHelpers, yupToFormErrors } from "formik";
+import useMutationCreateClient from "../../../Features/Clients/hooks/useMutationCreateClient"
+import useMutationUpdateClient from "../../../Features/Clients/hooks/useMutationUpdateClient"
 import { Drawer, Button } from 'antd';
 import FormClients from '../../../Features/Clients/components/form';
 import { Mutation } from "react-apollo";
@@ -19,18 +21,19 @@ interface Form {
     age: string
     address: string
     telephone: string
+    type: string
 }
 
 const GenericDrawer = ({ title, visible, setVisible, editData, setEditData }: Props) => {
-    function submit(values: Form, helper: FormikHelpers<Form>, addClient: () => Promise<any>) {
-        addClient().then(({ values }) => {
-             console.log(values);
-            setVisible(false)
-            setEditData(null)
-            helper.resetForm()
-          });
-       
-      }
+    const { createClient } = useMutationCreateClient()
+    const { updateClient } = useMutationUpdateClient()
+
+function submit(values: Form, helper: FormikHelpers<Form>) {
+    editData ? updateClient(values) : createClient(values)
+    setVisible(false)
+    setEditData(null)
+    helper.resetForm()
+  }
 
     function cancel(props: FormikHelpers<Form>) {
         setVisible(false)
@@ -53,9 +56,9 @@ const GenericDrawer = ({ title, visible, setVisible, editData, setEditData }: Pr
                 {(addClient:any, { data, loading, error }:any) => {
                 return (
                 <Formik
-                    initialValues={{ id: undefined, name: "", age: "", address: "", telephone: "" }}
+                    initialValues={{ id: undefined, name: "", age: "", address: "", telephone: "", type:"" }}
                     validationSchema={schema}
-                    onSubmit={(values, helper) => { submit(values, helper, addClient) }}
+                    onSubmit={(values, helper) => { console.log("value", values); return submit(values, helper) }}
                     onReset={(values, helper) => { cancel(helper) }}>
                     {(props: FormikProps<Form>) => <FormClients formikProps={props} editData={editData} />}
                 </Formik>)}}
@@ -91,5 +94,4 @@ const schema = Yup.object({
         .required(),
     telephone: Yup.string()
         .required(),
-
 });

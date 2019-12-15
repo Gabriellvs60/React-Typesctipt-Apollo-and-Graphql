@@ -4,3 +4,4 @@ mutation  deleteClient($id: ID!) {
   name
   }
 }
+
