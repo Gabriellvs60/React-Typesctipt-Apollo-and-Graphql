@@ -4,8 +4,6 @@ import useMutationCreateClient from "../../../Features/Clients/hooks/useMutation
 import useMutationUpdateClient from "../../../Features/Clients/hooks/useMutationUpdateClient"
 import { Drawer, Button } from 'antd';
 import FormClients from '../../../Features/Clients/components/form';
-import { Mutation } from "react-apollo";
-import { CREATE_CLIENT } from '../../../Features/queries/clients'
 import Yup from '../../../validations'
 
 interface Props {
@@ -28,12 +26,12 @@ const GenericDrawer = ({ title, visible, setVisible, editData, setEditData }: Pr
     const { createClient } = useMutationCreateClient()
     const { updateClient } = useMutationUpdateClient()
 
-function submit(values: Form, helper: FormikHelpers<Form>) {
-    editData ? updateClient(values) : createClient(values)
-    setVisible(false)
-    setEditData(null)
-    helper.resetForm()
-  }
+    function submit(values: Form, helper: FormikHelpers<Form>) {
+        editData ? updateClient(values) : createClient(values)
+        setVisible(false)
+        setEditData(null)
+        helper.resetForm()
+    }
 
     function cancel(props: FormikHelpers<Form>) {
         setVisible(false)
@@ -45,39 +43,17 @@ function submit(values: Form, helper: FormikHelpers<Form>) {
             <Drawer
                 title={title}
                 width={520}
-                closable={false}
+                closable={true}
                 onClose={() => setVisible(false)}
                 visible={visible}
             >
-                <Mutation
-                mutation={CREATE_CLIENT}
-                >
-
-                {(addClient:any, { data, loading, error }:any) => {
-                return (
                 <Formik
-                    initialValues={{ id: undefined, name: "", age: "", address: "", telephone: "", type:"" }}
+                    initialValues={{ id: undefined, name: "", age: "", address: "", telephone: "", type: "" }}
                     validationSchema={schema}
-                    onSubmit={(values, helper) => { console.log("value", values); return submit(values, helper) }}
+                    onSubmit={(values, helper) =>  submit(values, helper) }
                     onReset={(values, helper) => { cancel(helper) }}>
-                    {(props: FormikProps<Form>) => <FormClients formikProps={props} editData={editData} />}
-                </Formik>)}}
-                </Mutation>
-                <div
-                    style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        width: '100%',
-                        borderTop: '1px solid #e8e8e8',
-                        padding: '10px 16px',
-                        textAlign: 'right',
-                        left: 0,
-                        background: '#fff',
-                        borderRadius: '0 0 4px 4px',
-                    }}
-                >
-                    
-                </div>
+                     { (props: FormikProps<Form>) => <FormClients formikProps={props} editData={editData} /> }
+                </Formik>
             </Drawer>
         </>
     )
@@ -93,5 +69,7 @@ const schema = Yup.object({
     address: Yup.string()
         .required(),
     telephone: Yup.string()
+        .required(),
+        type: Yup.string()
         .required(),
 });

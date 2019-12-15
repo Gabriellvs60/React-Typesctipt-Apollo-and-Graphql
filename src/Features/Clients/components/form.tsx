@@ -12,7 +12,7 @@ interface Props {
 const Form = ({ formikProps, editData }: Props) => {
 
     useEffect(() => {
-        editData ? formikProps.setValues(editData) : formikProps.setValues({ id: undefined, name: "", age: "", address: "", telephone: "" })
+        editData ? formikProps.setValues(editData) : formikProps.setValues({ id: undefined, name: "", age: "", address: "", telephone: "", type:"comum" })
     }, [editData])
 
     return (
@@ -31,12 +31,12 @@ const Form = ({ formikProps, editData }: Props) => {
                 <Option value="premium">Premium</Option>
                 <Option value="trial">Trial</Option>
             </Select>
-            <Button htmlType="submit">
-                Salvar
-            </Button>
             <Button>
-                Cancelar
-            </Button>
+                        Salvar
+                    </Button>
+                    <Button>
+                        Cancelar
+                    </Button>
         </form>
 
     )

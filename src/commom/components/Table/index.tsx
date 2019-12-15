@@ -8,12 +8,14 @@ interface Props{
     // loading: boolean
     // onDeletePress(id: string): any
     onClickRow?: Function
+    onDeletePress(id: string): any
 }
 
-const GenericTable = ({data, columns, onClickRow}:Props) => {
+const GenericTable = ({data, columns, onClickRow,onDeletePress}:Props) => {
     const { currentColumns, currentData } = useGenericTable({
         data,
-        columns
+        columns,
+        onDeletePress
     })
     return(
         <Table

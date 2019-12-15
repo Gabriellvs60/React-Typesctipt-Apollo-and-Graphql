@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import useQueryAllClients from "./hooks/useQueryAllClients"
+import useMutationDeleteClient from './hooks/useMutationDeleteClient'
 import GenericTable from '../../commom/components/Table'
 import GenericDrawer from '../../commom/components/Drawer'
 
@@ -37,6 +38,7 @@ export default function Clients(props: Props) {
   const [showDrawer, setShowDrawer] = useState(false)
   const [title, setTitle] = useState("")
   const [editData, setEditData] = useState(null)
+  const { deleteClient } = useMutationDeleteClient({ refetch })
   
   function newClient() {
     console.log(editData)
@@ -74,6 +76,7 @@ export default function Clients(props: Props) {
       <GenericTable
         columns={column}
         data={data?.allClients || []}
+        onDeletePress={deleteClient}
         onClickRow={editItem}
         />
     </div>

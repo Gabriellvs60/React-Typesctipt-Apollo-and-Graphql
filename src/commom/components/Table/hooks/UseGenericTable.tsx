@@ -5,9 +5,10 @@ import merge from "lodash/merge";
 interface Props {
   data: any[];
   columns: any[];
+  onDeletePress(id: string): any
 }
 
-export function useGenericTable({ columns, data }: Props) {
+export function useGenericTable({ columns, data, onDeletePress }: Props) {
   const [currentColumns, setCurrentColumns] = useState([]);
   const [currentData, setCurrentData] = useState([]);
 
@@ -25,11 +26,11 @@ export function useGenericTable({ columns, data }: Props) {
       title: "",
       dataIndex: "",
       align: "center",
-      render: ((item: any) => <img src="./icons/delete.svg" onClick={(e) => { e.stopPropagation(); }} style={{ width: "20px" }} />)
+      render: ((item: any) => <img src="./icons/delete.svg" onClick={(e) => { e.stopPropagation(); onDeletePress(item.id)}} style={{ width: "20px" }} />)
     });
 
     setCurrentColumns(mappedColumns);
-  }, [columns]);
+  }, [columns, onDeletePress]);
 
   return { currentColumns, currentData };
 }
