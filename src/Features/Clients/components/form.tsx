@@ -23,9 +23,10 @@ const MyTextField = ({ label, ...props }: any) => {
 interface Props {
     formikProps: FormikProps<any>
     editData?: any
+    cancelFunction: Function
 }
 
-const Form = ({ formikProps, editData }: Props) => {
+const Form = ({ formikProps, editData, cancelFunction }: Props) => {
     useEffect(() => {
         editData ? formikProps.setValues({
             id: editData.id,
@@ -71,7 +72,7 @@ const Form = ({ formikProps, editData }: Props) => {
                 <Button type={'primary'} htmlType={'submit'}>
                     Salvar
                 </Button>
-                <Button type={'ghost'} htmlType={"reset"}>
+                <Button type={'ghost'} htmlType={"reset"} onClick={() => cancelFunction(formikProps)} >
                     Cancelar
                 </Button>
             </Bottom>

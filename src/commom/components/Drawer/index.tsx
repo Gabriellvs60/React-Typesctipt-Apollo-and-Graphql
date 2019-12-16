@@ -61,7 +61,7 @@ const GenericDrawer = ({ title, visible, setVisible, editData, setEditData }: Pr
                     onSubmit={(values, helper) =>  submit(values, helper) }
                     onReset={(values, helper) => { cancel(helper) }}>
                      { (props: FormikProps<Form>) =>  
-                     <FormClients formikProps={props} editData={editData}/>
+                     <FormClients formikProps={props} editData={editData} cancelFunction={cancel}/>
                      }
                      
                 </Formik>
