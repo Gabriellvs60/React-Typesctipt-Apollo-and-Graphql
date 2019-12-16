@@ -1,4 +1,3 @@
-
 import { ApolloError } from "apollo-boost";
 
 export class ErrorHandler {

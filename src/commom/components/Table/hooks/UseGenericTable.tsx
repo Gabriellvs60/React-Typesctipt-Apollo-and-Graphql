@@ -10,6 +10,7 @@ interface Props {
 
 export function useGenericTable({ columns, data, onDeletePress }: Props) {
   const [currentColumns, setCurrentColumns] = useState([]);
+ 
   const [currentData, setCurrentData] = useState([]);
 
   useEffect(() => {
@@ -32,5 +33,5 @@ export function useGenericTable({ columns, data, onDeletePress }: Props) {
     setCurrentColumns(mappedColumns);
   }, [columns, onDeletePress]);
 
-  return { currentColumns, currentData };
+  return { currentColumns, currentData, onDeletePress };
 }

@@ -7,18 +7,7 @@ export default function useUpdateClient() {
   const [mutate, data] = useUpdateClientMutation({
 
     refetchQueries: ['allClients']
-
-    // UPDATE WITHOUT REFETCH, PUSHING ITENS ON MEMORY
-    // update: (store, { data }) => {
-    //   const currentClients = store.readQuery<AllClientsQuery>({ query: AllClientsDocument, variables: { pagination: { page: 1, limit: 10 } } })
-    //   currentClients?.allClients.result.push(data?.createClient || {} as any)
-
-    //   store.writeQuery<AllClientsQuery>({
-    //     query: AllClientsDocument,
-    //     data: currentClients || {} as any
-    //   })
-    // }
-
+    
   });
 
   async function updateClient(input: UpdateClientMutationVariables) {

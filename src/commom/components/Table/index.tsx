@@ -5,13 +5,13 @@ import { useGenericTable } from './hooks/UseGenericTable';
 interface Props{
     data: any[]
     columns: any[]
-    // loading: boolean
+    loading: boolean
     // onDeletePress(id: string): any
     onClickRow?: Function
     onDeletePress(id: string): any
 }
 
-const GenericTable = ({data, columns, onClickRow,onDeletePress}:Props) => {
+const GenericTable = ({data, columns, onClickRow,onDeletePress, loading}:Props) => {
     const { currentColumns, currentData } = useGenericTable({
         data,
         columns,
@@ -21,6 +21,7 @@ const GenericTable = ({data, columns, onClickRow,onDeletePress}:Props) => {
         <Table
         columns={currentColumns}
         dataSource={currentData}
+        loading={loading}
         onRow={(record) => {
             return {
               onClick: event => { 

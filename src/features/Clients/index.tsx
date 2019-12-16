@@ -48,6 +48,7 @@ export default function Clients(props: Props) {
     setShowDrawer(true)
     setTitle("Edição de Cliente")
   }
+  
 
   return (
     <div>
@@ -63,6 +64,7 @@ export default function Clients(props: Props) {
         title={title}
       />
       <GenericTable
+        loading={loading}
         columns={column}
         data={data?.allClients || []}
         onDeletePress={deleteClient}
