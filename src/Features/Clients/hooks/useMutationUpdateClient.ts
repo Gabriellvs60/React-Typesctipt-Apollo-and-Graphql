@@ -27,12 +27,12 @@ export default function useUpdateClient() {
         variables: input
       });
       Toast.fire({
-        text: "Cliente adicionado com sucesso.",
+        text: "Cliente atualizado com sucesso.",
         icon: "success"
       });
       console.log("addsuccess")
     } catch (error) {
-      ErrorHandler.handle(error, "Erro ao Atualizar cliente.");
+      ErrorHandler.handle(error, "Erro ao atualizar cliente.");
     }
   }
 
