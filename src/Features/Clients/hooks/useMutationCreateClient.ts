@@ -1,5 +1,5 @@
 import { useCreateClientMutation, CreateClientMutationVariables} from "../../../api";
-// import { Toast } from "../../../common/config/swal";
+import { Toast } from "../../../commom/config/swal";
 import { ErrorHandler } from "../../../commom/utils/ErrorHandler";
 
 export default function useCreateClient() {
@@ -13,16 +13,14 @@ export default function useCreateClient() {
         await mutate({
           variables: input
         });
-        console.log("addsuccess")
-        // Toast.fire({
-        //   text: "Cliente adicionado com sucesso.",
-        //   icon: "success"
-        // });
+         Toast.fire({
+           text: "Cliente adicionado com sucesso.",
+          icon: "success"
+         });
       } catch (error) {
         console.log(error)
         ErrorHandler.handle(error, "Erro ao adicionar cliente.");
       }
   }
-
   return { createClient, data };
 }

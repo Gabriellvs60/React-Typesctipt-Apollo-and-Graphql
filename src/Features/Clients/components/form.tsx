@@ -40,7 +40,7 @@ const Form = ({ formikProps, editData }: Props) => {
             age: "",
             telephone: "",
             address: "",
-            type: "Premium"
+            type: "Comum"
         })
     }, [editData])
 
