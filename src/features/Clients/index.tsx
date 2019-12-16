@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import useQueryAllClients from "./hooks/useQueryAllClients"
-import useMutationDeleteClient from './hooks/useMutationDeleteClient'
-import GenericTable from '../../commom/components/Table'
-import GenericDrawer from '../../commom/components/Drawer'
+import useQueryAllClients from "./hooks/useQueryAllClients";
+import useMutationDeleteClient from './hooks/useMutationDeleteClient';
+import GenericTable from '../../commom/components/Table';
+import GenericDrawer from '../../commom/components/Drawer';
 import { Button } from 'antd';
-
+import { Top, Content } from '../../../src/commom/components/Layout/layout.styles';
 interface Props { }
 
 const column = [
@@ -52,10 +52,14 @@ export default function Clients(props: Props) {
 
   return (
     <div>
-      <h1>Lista de Clientes - Herbie</h1>
+      <h1 style={{textAlign:"center"}}>Lista de Clientes - Herbie</h1>
+
+      <Top>
       <Button style={{textAlign:"right"}} type="primary" onClick={() => { newClient() }}>
         Adicionar Novo
       </Button>
+      </Top>
+
       <GenericDrawer
         visible={showDrawer} 
         setVisible={setShowDrawer} 
@@ -70,6 +74,7 @@ export default function Clients(props: Props) {
         onDeletePress={deleteClient}
         onClickRow={editItem}
         />
+      
     </div>
   );
 }

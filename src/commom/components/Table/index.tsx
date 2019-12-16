@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'antd';
 import { useGenericTable } from './hooks/UseGenericTable';
-
+import './styles.css'
 interface Props{
     data: any[]
     columns: any[]
