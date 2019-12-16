@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useState, useEffect } from 'react';
 import useQueryAllClients from "./hooks/useQueryAllClients"
 import useMutationDeleteClient from './hooks/useMutationDeleteClient'
 import GenericTable from '../../commom/components/Table'
 import GenericDrawer from '../../commom/components/Drawer'
-
 import { Button } from 'antd';
 
 interface Props { }
@@ -52,15 +49,12 @@ export default function Clients(props: Props) {
     setTitle("Edição de Cliente")
   }
 
- 
   return (
     <div>
       <h1>Lista de Clientes - Herbie</h1>
-      
-      <Button type="primary" onClick={() => { newClient() }}>
+      <Button style={{textAlign:"right"}} type="primary" onClick={() => { newClient() }}>
         Adicionar Novo
       </Button>
-
       <GenericDrawer
         visible={showDrawer} 
         setVisible={setShowDrawer} 

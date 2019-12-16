@@ -10,7 +10,7 @@ interface Props {
     title: string,
     visible: any,
     setVisible: any,
-    editData: any,
+    editData?: any,
     setEditData: any,
 }
 interface Form {
@@ -27,8 +27,7 @@ const GenericDrawer = ({ title, visible, setVisible, editData, setEditData }: Pr
     const { updateClient } = useMutationUpdateClient()
 
     function submit(values: Form, helper: FormikHelpers<Form>) {
-        console.log("submit", values)
-
+        alert(JSON.stringify(values, null, 2));
         if (editData) {
             updateClient(values)
             console.log("update")
@@ -56,12 +55,14 @@ const GenericDrawer = ({ title, visible, setVisible, editData, setEditData }: Pr
                 onClose={() => setVisible(false)}
                 visible={visible}
             >
-                <Formik
+                <Formik 
                     initialValues={{ id: undefined, name: "", age: "", address: "", telephone: "", type: "" }}
                     validationSchema={schema}
                     onSubmit={(values, helper) =>  submit(values, helper) }
                     onReset={(values, helper) => { cancel(helper) }}>
-                     { (props: FormikProps<Form>) =>  <FormClients formikProps={props} editData={editData} />}
+                     { (props: FormikProps<Form>) =>  
+                     <FormClients formikProps={props} editData={editData}/>
+                     }
                      
                 </Formik>
             </Drawer>
@@ -72,7 +73,15 @@ const GenericDrawer = ({ title, visible, setVisible, editData, setEditData }: Pr
 export default GenericDrawer
 
 const schema = Yup.object({
-    name: Yup.string()
-        .required(),
+    // name: Yup.string()
+    //     .required(),
+    // age: Yup.string()
+    //     .required(),
+    // address: Yup.string()
+    //     .required(),
+    // telephone: Yup.string()
+    //     .required(),
+    // type: Yup.string()
+    //     .required(),
    
 });

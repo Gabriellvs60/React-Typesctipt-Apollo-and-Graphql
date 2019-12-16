@@ -1,15 +1,31 @@
 import React, { useEffect } from 'react';
-import { FormikProps } from "formik";
-import { Input, Select } from 'antd';
+import { FormikProps, Field, useField } from "formik";
+import { Input, Select, Button } from 'antd';
+import { Label, Bottom } from '../../../commom/components/Form/form.styles';
+
 const { Option } = Select;
+
+const MyTextField = ({ label, ...props }: any) => {
+    const [field, meta] = useField(props);
+    return (
+        <>
+            <label>
+                {label}
+                <Input {...field} {...props} />
+            </label>
+            {meta.touched && meta.error ? (
+                <div className="error">{meta.error}</div>
+            ) : null}
+        </>
+    );
+};
 
 interface Props {
     formikProps: FormikProps<any>
-    editData: any
+    editData?: any
 }
 
 const Form = ({ formikProps, editData }: Props) => {
-
     useEffect(() => {
         editData ? formikProps.setValues({
             id: editData.id,
@@ -30,31 +46,35 @@ const Form = ({ formikProps, editData }: Props) => {
 
     return (
         <form onSubmit={formikProps.handleSubmit}>
-            <p>Nome</p>
-            <Input name="name" placeholder="Nome" type="text" />
-            <p>Idade</p>
-            <Input name="age" placeholder="Idade" type="text" />
-            <p>Endereço</p>
-            <Input name="address" placeholder="Endereço" type="text" />
-            <p>Telefone</p>
-            <Input name="telephone" placeholder="Telefone" type="text" />
-            <p>Tipo</p>
-            <Select defaultValue="comum" style={{ width: 120 }}>
-                <Option value="comum">Comum</Option>
-                <Option value="premium">Premium</Option>
-                <Option value="trial">Trial</Option>
-            </Select>
-            <button
-                    type={'submit'}
-                    >
+            <Label>Nome</Label>
+            <MyTextField name="name" type="text" />
+            <Label>Idade</Label>
+            <MyTextField name="age" type="text" />
+            <Label>Endereço</Label>
+            <MyTextField name="address" type="text" />
+            <Label>Telefone</Label>
+            <MyTextField name="telephone" type="text" />
+            <Label>Tipo</Label>
+
+            <Field
+                name="type"
+                component="select"
+                placeholder="Tipo de Cliente"
+                style={{ width: 120 }}
+                value={formikProps.values.type}>
+                <option value="Comum">Comum</option>
+                <option value="Premium">Premium</option>
+                <option value="Trial">Trial</option>
+            </Field>
+
+            <Bottom>
+                <Button type={'primary'} htmlType={'submit'}>
                     Salvar
-                  </button>
-                <button
-                    type={'reset'}
-                   
-                    >
+                </Button>
+                <Button type={'ghost'} htmlType={"reset"}>
                     Cancelar
-                </button>
+                </Button>
+            </Bottom>
         </form>
     )
 }
