@@ -24,7 +24,7 @@ export default function useAllClients({ refetch }: Props) {
         console.log("deletesuccess")
          Toast.fire({
            text: "Cliente Excluido com sucesso.",
-          icon: "success"
+           icon: "success"
          });
       } catch (error) {
         ErrorHandler.handle(error, "Erro ao remover cliente.");
