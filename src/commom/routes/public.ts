@@ -1,6 +1,8 @@
 import { RouteProps } from "react-router-dom";
 // import Login from "../../features/Login";
-import Clients from "../../Features/Clients";
+
+import Ads from "../../Features/Ads";
+
 interface RouteWithRoles extends RouteProps {
   roles: string[];
 }
@@ -12,9 +14,15 @@ export const publicRoutes: RouteWithRoles[] = [
   //   exact: true,
   //   roles: ["*"]
   // },
+  // {
+  //   path: "/",
+  //   component: Clients,
+  //   exact: true,
+  //   roles: ["*"]
+  // },
   {
     path: "/",
-    component: Clients,
+    component: Ads,
     exact: true,
     roles: ["*"]
   }

@@ -1,0 +1,8 @@
+query getAllAds {
+    allAds {
+      id
+      title
+      description
+      price
+    }
+  }
